@@ -2,18 +2,19 @@ import Head from "next/head"
 import Banner from "../components/banner"
 import Card from "../components/card"
 import Image from "next/image"
-import coffeeStoresData from "../data/coffee-stores.json"
+import { fetchCoffeeStores } from '../lib/coffee-stores'
 
 import styles from "../styles/Home.module.css"
 
 export async function getStaticProps(context) {
-  console.log("get static props")
+const coffeeStores = await fetchCoffeeStores()
   return {
     props: {
-      coffeeStores: coffeeStoresData,
-    },
+      coffeeStores,
+    } 
   }
 }
+
 
 export default function Home(props) {
   const handleOnBannerBtnClick = () => console.log("Hi from banner button")
@@ -44,7 +45,7 @@ export default function Home(props) {
                   <Card
                     key={coffeeStore.id}
                     name={coffeeStore.name}
-                    imgUrl={coffeeStore.imgUrl}
+                    imgUrl={coffeeStore.imgUrl || 'https://images.unsplash.com/photo-1498804103079-a6351b050096?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=2468&q=80'}
                     href={`/coffee-store/${coffeeStore.id}`}
                   />
                 )
