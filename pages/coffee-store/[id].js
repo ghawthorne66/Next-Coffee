@@ -9,7 +9,7 @@ import styles from "../../styles/coffee-store.module.css"
 
 export async function getStaticProps(staticProps) {
   const params = staticProps.params
-//   console.log("params", params);
+  //   console.log("params", params);
 
   const coffeeStores = await fetchCoffeeStores()
   return {
@@ -44,7 +44,7 @@ const CoffeeStore = (props) => {
 
   console.log("props.coffeeStore", props.coffeeStore)
 
-  const { address, name, neighborhood, imgUrl } = props.coffeeStore
+  const { address, name, neighbourhood, imgUrl } = props.coffeeStore
 
   const handleUpvoteButton = () => console.log("Handle Upvote")
 
@@ -57,7 +57,7 @@ const CoffeeStore = (props) => {
         <div className={styles.col1}>
           <div className={styles.backToHomeLink}>
             <Link href="/">
-              <a>Back to home</a>
+              <a>← Back to home</a>
             </Link>
           </div>
           <div className={styles.nameWrapper}>
@@ -79,12 +79,13 @@ const CoffeeStore = (props) => {
             <Image src="/static/icons/places.svg" width="24" height="24" />
             <p className={styles.text}>{address}</p>
           </div>
-          
+          {neighbourhood && (
             <div className={styles.iconWrapper}>
               <Image src="/static/icons/nearMe.svg" width="24" height="24" />
-              <p className={styles.text}>{neighborhood}</p>
+              <p className={styles.text}>{neighbourhood}</p>
             </div>
-         
+          )}
+
           <div className={styles.iconWrapper}>
             <Image src="/static/icons/star.svg" width="24" height="24" />
             <p className={styles.text}>1</p>
